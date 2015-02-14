@@ -45,6 +45,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 					//response.success(toReturn);
 
 					// Event management on a successful check in
+					var Event = Parse.Object.extend("Event");
 					var eventQuery = new Parse.Query(Event);
 					eventQuery.get('Jmv8CbL0P2', {
 					
@@ -205,8 +206,11 @@ Parse.Cloud.define("test", function(request, response) {
 
 Parse.Cloud.define("registerEventListener", function(request, response){
 		// Event management
+		var message = "";
 		
+		var Event = Parse.Object.extend("Event");
 		var eventQuery = new Parse.Query(Event);
+		message = message + "eventQuery object created\n";
 		eventQuery.get('Jmv8CbL0P2', {
 		
 			success: function(object){
