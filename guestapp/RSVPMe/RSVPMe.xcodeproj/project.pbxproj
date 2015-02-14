@@ -38,6 +38,9 @@
 		FA9C992D1A8F4C8A005F1BA3 /* ParseRest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C992C1A8F4C8A005F1BA3 /* ParseRest.m */; };
 		FA9C99801A8F81DA005F1BA3 /* greencheck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA9C997F1A8F81DA005F1BA3 /* greencheck.jpg */; };
 		FA9C99831A8F8402005F1BA3 /* PhotoStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C99821A8F8402005F1BA3 /* PhotoStreamViewController.m */; };
+		FA9C99861A8F908C005F1BA3 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C99851A8F908C005F1BA3 /* UIImage+ResizeAdditions.m */; };
+		FA9C998B1A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C99881A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m */; };
+		FA9C998C1A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C998A1A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,12 @@
 		FA9C997F1A8F81DA005F1BA3 /* greencheck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = greencheck.jpg; path = images/greencheck.jpg; sourceTree = "<group>"; };
 		FA9C99811A8F83F0005F1BA3 /* PhotoStreamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhotoStreamViewController.h; path = views/PhotoStreamViewController.h; sourceTree = "<group>"; };
 		FA9C99821A8F8402005F1BA3 /* PhotoStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoStreamViewController.m; path = views/PhotoStreamViewController.m; sourceTree = "<group>"; };
+		FA9C99841A8F908C005F1BA3 /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ResizeAdditions.h"; path = "RSVPMe/UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		FA9C99851A8F908C005F1BA3 /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ResizeAdditions.m"; path = "RSVPMe/UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		FA9C99871A8F90E3005F1BA3 /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+AlphaAdditions.h"; path = "RSVPMe/UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		FA9C99881A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AlphaAdditions.m"; path = "RSVPMe/UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		FA9C99891A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCornerAdditions.h"; path = "RSVPMe/UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		FA9C998A1A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCornerAdditions.m"; path = "RSVPMe/UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +142,12 @@
 		FA9C98C51A8F331B005F1BA3 = {
 			isa = PBXGroup;
 			children = (
+				FA9C99871A8F90E3005F1BA3 /* UIImage+AlphaAdditions.h */,
+				FA9C99881A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m */,
+				FA9C99891A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.h */,
+				FA9C998A1A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.m */,
+				FA9C99841A8F908C005F1BA3 /* UIImage+ResizeAdditions.h */,
+				FA9C99851A8F908C005F1BA3 /* UIImage+ResizeAdditions.m */,
 				049369C81A8F85C30031CF97 /* CoreBluetooth.framework */,
 				FA9C992B1A8F4C8A005F1BA3 /* ParseRest.h */,
 				FA9C992C1A8F4C8A005F1BA3 /* ParseRest.m */,
@@ -348,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9C998B1A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m in Sources */,
 				FA9C98FD1A8F3442005F1BA3 /* UIImage+ImageWithUIView.m in Sources */,
 				FA9C992D1A8F4C8A005F1BA3 /* ParseRest.m in Sources */,
 				FA9C99061A8F34BF005F1BA3 /* MainViewController.m in Sources */,
@@ -355,6 +371,8 @@
 				FA9C990C1A8F3541005F1BA3 /* MenuViewController.m in Sources */,
 				FA9C98FC1A8F3442005F1BA3 /* ECSlidingViewController.m in Sources */,
 				FA9C98D71A8F331B005F1BA3 /* AppDelegate.m in Sources */,
+				FA9C99861A8F908C005F1BA3 /* UIImage+ResizeAdditions.m in Sources */,
+				FA9C998C1A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				FA9C99091A8F34D1005F1BA3 /* BaseViewController.m in Sources */,
 				FA9C98D41A8F331B005F1BA3 /* main.m in Sources */,
 				FA9C99831A8F8402005F1BA3 /* PhotoStreamViewController.m in Sources */,

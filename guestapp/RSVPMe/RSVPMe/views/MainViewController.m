@@ -68,6 +68,10 @@
 }
 
 - (IBAction)doLogin:(id)sender {
+    
+    [lastNameField resignFirstResponder];
+    [confirmCode resignFirstResponder];
+    
     NSString* username = [NSString stringWithFormat:@"%@%@", confirmCode.text, lastNameField.text];
     
     if ([confirmCode.text length] == 0 || [lastNameField.text length] == 0) {

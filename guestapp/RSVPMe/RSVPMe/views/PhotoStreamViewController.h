@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
-@interface PhotoStreamViewController : UICollectionViewController <UICollectionViewDelegate, UICollectionViewDataSource> {
+@interface PhotoStreamViewController : UICollectionViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate> {
     UIRefreshControl* refreshControl;
 }
+
+- (IBAction)showMenu:(id)sender;
+
+- (void)handleRefresh:(id)sender;
+
+- (IBAction)addPhoto:(id)sender;
+
+- (void)loadImages;
 
 @end
