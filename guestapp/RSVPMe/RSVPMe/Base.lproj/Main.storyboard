@@ -123,6 +123,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHb-gK-mhI">
+                                <rect key="frame" x="274" y="388" width="53" height="30"/>
+                                <state key="normal" title="Log out">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doLogout:" destination="MZz-75-j1n" eventType="touchUpInside" id="KcC-sn-phg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -132,12 +141,14 @@
                             <constraint firstItem="D8P-Vr-N5r" firstAttribute="centerY" secondItem="0de-sn-PYn" secondAttribute="centerY" id="EqG-Uk-kgO"/>
                             <constraint firstItem="0de-sn-PYn" firstAttribute="top" secondItem="TfX-ZH-R0J" secondAttribute="bottom" constant="22" id="F3w-3z-Iz3"/>
                             <constraint firstItem="Ngt-qG-IUd" firstAttribute="top" secondItem="yci-XY-9Ju" secondAttribute="bottom" constant="57" id="HqK-Om-zZQ"/>
+                            <constraint firstItem="iHb-gK-mhI" firstAttribute="centerX" secondItem="Ngt-qG-IUd" secondAttribute="centerX" id="Ht6-r5-YqV"/>
                             <constraint firstItem="T1P-yq-GgR" firstAttribute="trailing" secondItem="TfX-ZH-R0J" secondAttribute="trailing" id="M6Z-Qo-vwz"/>
                             <constraint firstItem="0de-sn-PYn" firstAttribute="trailing" secondItem="TfX-ZH-R0J" secondAttribute="trailing" id="Vq0-9a-Pmk"/>
                             <constraint firstItem="T1P-yq-GgR" firstAttribute="leading" secondItem="TfX-ZH-R0J" secondAttribute="leading" id="W7E-HY-kmJ"/>
                             <constraint firstItem="0de-sn-PYn" firstAttribute="centerX" secondItem="2kb-NP-f9R" secondAttribute="centerX" id="Ycs-GL-g9q"/>
                             <constraint firstItem="2kb-NP-f9R" firstAttribute="centerX" secondItem="P9m-ud-6jy" secondAttribute="centerX" id="bsm-sf-JTJ"/>
                             <constraint firstItem="yci-XY-9Ju" firstAttribute="centerX" secondItem="0de-sn-PYn" secondAttribute="centerX" id="cxe-6T-i72"/>
+                            <constraint firstItem="iHb-gK-mhI" firstAttribute="top" secondItem="Ngt-qG-IUd" secondAttribute="bottom" constant="78" id="dZ0-pz-R20"/>
                             <constraint firstItem="2kb-NP-f9R" firstAttribute="top" secondItem="jO2-Ti-NeZ" secondAttribute="bottom" constant="81" id="eB5-Rc-26V"/>
                             <constraint firstItem="yci-XY-9Ju" firstAttribute="top" secondItem="0de-sn-PYn" secondAttribute="bottom" constant="12" id="ieG-td-2rN"/>
                             <constraint firstItem="2kb-NP-f9R" firstAttribute="top" secondItem="TfX-ZH-R0J" secondAttribute="bottom" constant="7" id="lng-eu-aQi"/>
@@ -158,6 +169,7 @@
                         <outlet property="confirmCode" destination="0de-sn-PYn" id="cvk-bH-IgA"/>
                         <outlet property="lastNameField" destination="TfX-ZH-R0J" id="ZSu-eX-s0o"/>
                         <outlet property="loginButton" destination="yci-XY-9Ju" id="3Xh-MZ-AZP"/>
+                        <outlet property="logoutButton" destination="iHb-gK-mhI" id="HMX-Aa-rCc"/>
                         <outlet property="welcomeLabel" destination="T1P-yq-GgR" id="ZX5-9Q-ODv"/>
                     </connections>
                 </viewController>
