@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 RSVPME. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "FirstViewController.h"
 
 @interface FirstViewController ()
@@ -17,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate transmitBeacon];
 }
 
 - (void)didReceiveMemoryWarning {

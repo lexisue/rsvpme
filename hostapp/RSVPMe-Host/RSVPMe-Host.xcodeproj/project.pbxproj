@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04F73F0B1A8F774500DFA55D /* CSMLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F73F0A1A8F774500DFA55D /* CSMLocationManager.m */; };
-		04F73F0E1A8F786500DFA55D /* CSMBeaconRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F73F0D1A8F786500DFA55D /* CSMBeaconRegion.m */; };
 		FA9C993D1A8F50F0005F1BA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C993C1A8F50F0005F1BA3 /* main.m */; };
 		FA9C99401A8F50F1005F1BA3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C993F1A8F50F1005F1BA3 /* AppDelegate.m */; };
 		FA9C99431A8F50F1005F1BA3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C99421A8F50F1005F1BA3 /* FirstViewController.m */; };
@@ -44,10 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04F73F091A8F774500DFA55D /* CSMLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMLocationManager.h; sourceTree = "<group>"; };
-		04F73F0A1A8F774500DFA55D /* CSMLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMLocationManager.m; sourceTree = "<group>"; };
-		04F73F0C1A8F786500DFA55D /* CSMBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMBeaconRegion.h; sourceTree = "<group>"; };
-		04F73F0D1A8F786500DFA55D /* CSMBeaconRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMBeaconRegion.m; sourceTree = "<group>"; };
 		FA9C99371A8F50F0005F1BA3 /* RSVPMe-Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSVPMe-Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9C993B1A8F50F0005F1BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA9C993C1A8F50F0005F1BA3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -149,10 +143,6 @@
 				FA9C993E1A8F50F0005F1BA3 /* AppDelegate.h */,
 				FA9C993F1A8F50F1005F1BA3 /* AppDelegate.m */,
 				FA9C99411A8F50F1005F1BA3 /* FirstViewController.h */,
-				04F73F091A8F774500DFA55D /* CSMLocationManager.h */,
-				04F73F0A1A8F774500DFA55D /* CSMLocationManager.m */,
-				04F73F0C1A8F786500DFA55D /* CSMBeaconRegion.h */,
-				04F73F0D1A8F786500DFA55D /* CSMBeaconRegion.m */,
 				FA9C99421A8F50F1005F1BA3 /* FirstViewController.m */,
 				FA9C99441A8F50F1005F1BA3 /* SecondViewController.h */,
 				FA9C99451A8F50F1005F1BA3 /* SecondViewController.m */,
@@ -295,8 +285,6 @@
 				FA9C99401A8F50F1005F1BA3 /* AppDelegate.m in Sources */,
 				FA9C99431A8F50F1005F1BA3 /* FirstViewController.m in Sources */,
 				FA9C993D1A8F50F0005F1BA3 /* main.m in Sources */,
-				04F73F0B1A8F774500DFA55D /* CSMLocationManager.m in Sources */,
-				04F73F0E1A8F786500DFA55D /* CSMBeaconRegion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
