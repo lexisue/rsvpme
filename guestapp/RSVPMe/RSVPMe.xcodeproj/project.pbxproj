@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		049369C91A8F85C40031CF97 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049369C81A8F85C30031CF97 /* CoreBluetooth.framework */; };
-		049369CB1A8FC7D60031CF97 /* geotest.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 049369CA1A8FC7D60031CF97 /* geotest.gpx */; };
 		FA9C98D41A8F331B005F1BA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C98D31A8F331B005F1BA3 /* main.m */; };
 		FA9C98D71A8F331B005F1BA3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C98D61A8F331B005F1BA3 /* AppDelegate.m */; };
 		FA9C98DA1A8F331B005F1BA3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C98D91A8F331B005F1BA3 /* ViewController.m */; };
@@ -56,7 +55,6 @@
 
 /* Begin PBXFileReference section */
 		049369C81A8F85C30031CF97 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		049369CA1A8FC7D60031CF97 /* geotest.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = geotest.gpx; path = RSVPMe/geotest.gpx; sourceTree = "<group>"; };
 		FA9C98CE1A8F331B005F1BA3 /* RSVPMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSVPMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9C98D21A8F331B005F1BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA9C98D31A8F331B005F1BA3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 		FA9C98C51A8F331B005F1BA3 = {
 			isa = PBXGroup;
 			children = (
-				049369CA1A8FC7D60031CF97 /* geotest.gpx */,
 				FA9C99871A8F90E3005F1BA3 /* UIImage+AlphaAdditions.h */,
 				FA9C99881A8F90E3005F1BA3 /* UIImage+AlphaAdditions.m */,
 				FA9C99891A8F90E3005F1BA3 /* UIImage+RoundedCornerAdditions.h */,
@@ -347,7 +344,6 @@
 				FA9C98DD1A8F331B005F1BA3 /* Main.storyboard in Resources */,
 				FA9C98E21A8F331B005F1BA3 /* LaunchScreen.xib in Resources */,
 				FA9C99801A8F81DA005F1BA3 /* greencheck.jpg in Resources */,
-				049369CB1A8FC7D60031CF97 /* geotest.gpx in Resources */,
 				FA9C99021A8F3464005F1BA3 /* menu-icon@2x.png in Resources */,
 				FA9C98DF1A8F331B005F1BA3 /* Images.xcassets in Resources */,
 				FA9C99011A8F3464005F1BA3 /* menu-icon.png in Resources */,
