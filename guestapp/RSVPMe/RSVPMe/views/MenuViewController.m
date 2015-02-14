@@ -41,8 +41,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.menu = [NSArray arrayWithObjects:@"Party Info", @"Trivia", @"Map", @"RSVP", nil];
-    menuToIdentifier = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"info", @"trivia", @"map", @"rsvp", nil] forKeys:self.menu];
+    self.menu = [NSArray arrayWithObjects:@"Check In", @"Photo Stream", nil];
+    menuToIdentifier = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"checkIn", @"photos", nil] forKeys:self.menu];
     
     
     [self.slidingViewController setAnchorRightRevealAmount:MENU_WIDTH];
