@@ -13,3 +13,5 @@
 #endif
 
 #define FONT_FAMILY_FANCY @"Snell Roundhand"
+
+#define CHECKED_IN_STRING @"checkedIn"
