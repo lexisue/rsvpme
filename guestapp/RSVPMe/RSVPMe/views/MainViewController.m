@@ -68,6 +68,10 @@
 }
 
 - (IBAction)doLogin:(id)sender {
+    
+    [lastNameField resignFirstResponder];
+    [confirmCode resignFirstResponder];
+    
     NSString* username = [NSString stringWithFormat:@"%@%@", confirmCode.text, lastNameField.text];
     
     if ([confirmCode.text length] == 0 || [lastNameField.text length] == 0) {
@@ -103,13 +107,17 @@
                 [defaults synchronize];
                 
                 [self showOrHideCheckIn];
+                
+                // update the attendance
+                [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
+                    attendanceLabel.text = [result objectForKey:@"message"];
+                }];
             }
             else {
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"something failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 
                 [alert show];
             }
-            NSLog(@"%@", result);
         }
         else if (error) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];

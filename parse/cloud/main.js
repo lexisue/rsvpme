@@ -15,28 +15,94 @@ Parse.Cloud.define("checkIn", function(request, response) {
 
 			foundUser.save(null, {
 				success: function(result) {
+					Parse.Cloud.useMasterKey();
 					var pushQuery = new Parse.Query(Parse.Installation);
 					pushQuery.equalTo('deviceType', 'ios');
-					    
-					Parse.Push.send({
-					  where: pushQuery, // Set our Installation query
-					  data: {
-					    alert: result.get('firstName') + ' ' + result.get('lastName') + ' just checked in!'
-					  }
-					}, {
-					  success: function() {
-					    // Push was successful
-					    console.log('Push success');
-					  },
-					  error: function(error) {
-					    throw "Got an error " + error.code + " : " + error.message;
-					  }
-					});
+					pushQuery.equalTo('channels', 'hostApp');
 
+					// send a push if they're on the watch list for the host app
+					if (result.get('shouldPush') == true) {
+						Parse.Push.send({
+						  where: pushQuery, // Set our Installation query
+						  data: {
+						    alert: result.get('firstName') + ' ' + result.get('lastName') + ' just checked in!'
+						  }
+						}, {
+						  success: function() {
+						    // Push was successful
+						    console.log('Push success');
+						  },
+						  error: function(error) {
+						    throw "Got an error " + error.code + " : " + error.message;
+						  }
+						});
+					}
+
+					// set the return object
 					var toReturn = {};
 					toReturn.code = 200;
 					toReturn.user = result;
 					response.success(toReturn);
+
+					// get a count and see % thresholds
+					/*var checkedInQuery = new Parse.Query(Parse.User);
+					checkedInQuery.equalTo('isGuest', true);
+					checkedInQuery.find({
+						success: function(results) {
+							var checkedInCount = 0;
+							_.each(results, function(result) {
+								if (result.get('isCheckedIn') == true) {
+									checkedInCount++;
+								}
+							});
+
+							var percentage = (checkedInCount / results.length) * 100;
+
+							// look for a threshold in the range for this percentage
+							var thresholdQuery = new Parse.Query("PushThreshold");
+							thresholdQuery.lessThanOrEqualTo('percentage', percentage);
+							thresholdQuery.equalTo('hasSent', false);
+							thresholdQuery.ascending('percentage');
+							thresholdQuery.first({
+								success: function(result) {
+
+									var shouldSend = 0;
+
+									if (result) {
+										var percentagePushQuery = new Parse.Query(Parse.Installation);
+										percentagePushQuery.equalTo('deviceType', 'ios');
+										Parse.Push.send({
+										  where: percentagePushQuery, // Set our Installation query
+										  data: {
+										    alert: '' + result.get('percentageText') + ' of the guests has already checked in!'
+										  }
+										}, {
+										  success: function() {
+										    // Push was successful
+										    result.set('hasSent', true);
+										    result.save();
+										    response.success(toReturn);
+										  },
+										  error: function(error) {
+										    throw "Got an error " + error.code + " : " + error.message;
+										    response.success(toReturn);
+										  }
+										});
+									}
+								},
+								error: function(error) {
+									console.error('Problem getting thresholds');
+									response.success(toReturn);
+								}
+							});
+						},
+						error: function(error) {
+							console.error('Error trying to determine percentage checked in');
+							response.success(toReturn);
+						}
+					});*/
+
+					
 				},
 				error: function(error) {
 					response.error(error);
@@ -84,7 +150,7 @@ Parse.Cloud.define("attendance", function(request, response){
 
 			var toReturn = {};
 			toReturn.code = 200;
-			toReturn.message = count + ' out of ' + total + ' are already here!';
+			toReturn.message = count + ' out of ' + total + ' guests are already here!';
 			response.success(toReturn);
 		}), function (error) {
 			response.error('Error getting checked in');
@@ -95,9 +161,22 @@ Parse.Cloud.define("attendance", function(request, response){
 	
 });
 
+Parse.Cloud.define("test", function(request, response) {
 
-// Use Parse.Cloud.define to define as many cloud functions as you want.
-// For example:
-Parse.Cloud.define("hello", function(request, response) {
-  response.success("Hello world!");
+	Parse.Cloud.useMasterKey();
+	var query = new Parse.Query(Parse.Installation);
+	query.containsAll('channels', ['hostApp']);
+
+
+	query.find({
+		success: function(results) {
+			var toReturn = {};
+			toReturn.code = 200;
+			toReturn.items = results;
+			response.success(toReturn);
+		},
+		error: function(error) {
+			response.error(error);
+		}
+	});
 });

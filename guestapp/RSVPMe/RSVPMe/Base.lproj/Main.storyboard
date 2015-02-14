@@ -4,6 +4,52 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
+        <!--Photos-->
+        <scene sceneID="9ol-Lt-SrW">
+            <objects>
+                <collectionViewController id="UTl-Lh-VV9" customClass="PhotoStreamViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="m7w-zM-vgF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="z27-TZ-xnd">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lMc-dR-6Q8">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="UTl-Lh-VV9" id="Vpv-R0-u4H"/>
+                            <outlet property="delegate" destination="UTl-Lh-VV9" id="h7n-zu-DRx"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Photos" id="aAm-Cv-gZ6">
+                        <barButtonItem key="leftBarButtonItem" image="menu-icon.png" id="hMq-Af-ix7">
+                            <connections>
+                                <action selector="showMenu:" destination="UTl-Lh-VV9" id="dXx-si-Xfw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LOV-pJ-6jZ">
+                            <connections>
+                                <action selector="addPhoto:" destination="UTl-Lh-VV9" id="l2l-xd-vnF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CAx-ok-WX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1525" y="-943"/>
+        </scene>
         <!--Check In-->
         <scene sceneID="DxR-pI-Fjf">
             <objects>
@@ -166,6 +212,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PPd-In-c05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="371" y="-272"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="213-VT-Y0h">
+            <objects>
+                <navigationController storyboardIdentifier="photos" automaticallyAdjustsScrollViewInsets="NO" id="BCe-ga-RL4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lSx-Ge-VX1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UTl-Lh-VV9" kind="relationship" relationship="rootViewController" id="gRX-Qe-OXS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Tp-9U-7HY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="-962"/>
         </scene>
     </scenes>
     <resources>
