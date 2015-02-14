@@ -53,10 +53,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greencheck.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="D8P-Vr-N5r">
+                                <rect key="frame" x="202" y="83" width="197" height="184"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="184" id="owW-AG-scy"/>
+                                    <constraint firstAttribute="width" constant="197" id="t00-Jm-AE8"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="D8P-Vr-N5r" firstAttribute="centerX" secondItem="0de-sn-PYn" secondAttribute="centerX" id="6J1-4y-Cwp"/>
                             <constraint firstItem="Ngt-qG-IUd" firstAttribute="centerX" secondItem="yci-XY-9Ju" secondAttribute="centerX" id="9qE-DP-QXo"/>
+                            <constraint firstItem="D8P-Vr-N5r" firstAttribute="centerY" secondItem="0de-sn-PYn" secondAttribute="centerY" id="EqG-Uk-kgO"/>
                             <constraint firstItem="0de-sn-PYn" firstAttribute="top" secondItem="TfX-ZH-R0J" secondAttribute="bottom" constant="22" id="F3w-3z-Iz3"/>
                             <constraint firstItem="Ngt-qG-IUd" firstAttribute="top" secondItem="yci-XY-9Ju" secondAttribute="bottom" constant="57" id="HqK-Om-zZQ"/>
                             <constraint firstItem="0de-sn-PYn" firstAttribute="trailing" secondItem="TfX-ZH-R0J" secondAttribute="trailing" id="Vq0-9a-Pmk"/>
@@ -79,6 +88,7 @@
                     <connections>
                         <outlet property="attendanceLabel" destination="Ngt-qG-IUd" id="rzH-Le-6Wu"/>
                         <outlet property="checkInButton" destination="2kb-NP-f9R" id="4BP-wJ-hvo"/>
+                        <outlet property="checkmark" destination="D8P-Vr-N5r" id="duq-sJ-2LG"/>
                         <outlet property="confirmCode" destination="0de-sn-PYn" id="cvk-bH-IgA"/>
                         <outlet property="lastNameField" destination="TfX-ZH-R0J" id="ZSu-eX-s0o"/>
                         <outlet property="loginButton" destination="yci-XY-9Ju" id="3Xh-MZ-AZP"/>
@@ -159,6 +169,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="greencheck.jpg" width="425" height="425"/>
         <image name="menu-icon.png" width="33" height="30"/>
     </resources>
 </document>
