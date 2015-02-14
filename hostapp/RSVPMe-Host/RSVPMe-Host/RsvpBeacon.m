@@ -11,6 +11,7 @@
 #import "RsvpBeacon.h"
 
 #define RSVPME_UUID @"0494E11D-0BAC-43E6-B570-2AF6D36F8562"
+#define RSVPME_IDENTIFIER @"com.gopherapps.rsvpme"
 
 @implementation RsvpBeacon
 
@@ -20,21 +21,12 @@
         _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                                                                     major:1
                                                                     minor:1
-                                                               identifier:[[NSBundle mainBundle] bundleIdentifier]];
+                                                               identifier:RSVPME_IDENTIFIER];
         
         /*
          _beaconRegion.notifyEntryStateOnDisplay = YES;
          _beaconRegion.notifyOnEntry = NO;
          _beaconRegion.notifyOnExit = NO;
-         */
-        /*
-         NSDictionary *peripheralData = [advertisingRegion peripheralDataWithMeasuredPower:nil];
-         
-         CBPeripheralManager *peripheralManager = [[CBPeripheralManager alloc]
-         initWithDelegate:self
-         queue:dispatch_get_main_queue()];
-         
-         [peripheralManager startAdvertising:peripheralData];
          */
     }
     return self;
@@ -42,6 +34,7 @@
 
 
 - (void)transmitBeacon {
+    NSLog(@"transmitBeacon");
     _beaconPeripheralData = [_beaconRegion peripheralDataWithMeasuredPower:nil];
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
                                                                  queue:nil
@@ -49,6 +42,7 @@
 }
 
 -(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
+    NSLog(@"peripheralManagerDidUpdateState");
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         NSLog(@"Powered On");
         [_peripheralManager startAdvertising:self.beaconPeripheralData];

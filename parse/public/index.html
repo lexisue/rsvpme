@@ -48,7 +48,6 @@
             var row = $("<tr />")
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append($("<input type=hidden class='guestID' name='checkedGuests[]' value='" + rowData.id + "'>"));
-            row.append($("<td>" + rowData.id + "</td>"));
             row.append($("<td>" + rowData.get("firstName") + "</td>"));
             row.append($("<td>" + rowData.get("lastName")+ "</td>"));
           }

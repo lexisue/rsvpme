@@ -7,28 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-#define BEACON_IDENTIFIER @"com.gopherapps.rsvpme"
+#define RSVPME_UUID @"0494E11D-0BAC-43E6-B570-2AF6D36F8562"
+#define RSVPME_IDENTIFIER @"com.gopherapps.rsvpme"
 
-typedef NS_ENUM(NSUInteger, CSMApplicationMode) {
-    CSMApplicationModePeripheral = 0,
-    CSMApplicationModeRegionMonitoring
-};
-
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CBPeripheralManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, strong) NSUUID *myUUID;
+@property (strong, nonatomic) CLBeaconRegion* beaconRegion;
+@property (strong, nonatomic) NSDictionary* beaconPeripheralData;
+@property (strong, nonatomic) CBPeripheralManager* peripheralManager;
 
-@property (nonatomic, assign) CSMApplicationMode applicationMode;
 
-/**
- * Return the appdelegate class
- */
-+ (AppDelegate*)appDelegate;
-
+- (void)transmitBeacon;
 
 @end
 

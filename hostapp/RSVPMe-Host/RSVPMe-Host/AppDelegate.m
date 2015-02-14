@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "RsvpBeacon.h"
 
 @interface AppDelegate ()
 
@@ -15,6 +16,7 @@
 
 @implementation AppDelegate
 
+/*
 + (AppDelegate*)appDelegate {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
@@ -26,7 +28,7 @@
     }
     return _myUUID;
 }
-
+*/
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -43,6 +45,12 @@
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
+
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:RSVPME_UUID];
+    _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                            major:1
+                                                            minor:1
+                                                       identifier:RSVPME_IDENTIFIER];
     
     
     return YES;
@@ -80,6 +88,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+
+
+- (void)transmitBeacon {
+    NSLog(@"transmitBeacon");
+    _beaconPeripheralData = [_beaconRegion peripheralDataWithMeasuredPower:nil];
+    _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
+                                                                 queue:nil
+                                                               options:nil];
+}
+
+-(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
+    if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
+        NSLog(@"Powered On");
+        [_peripheralManager startAdvertising:self.beaconPeripheralData];
+    } else if (peripheral.state == CBPeripheralManagerStatePoweredOff) {
+        NSLog(@"Powered Off");
+        [_peripheralManager stopAdvertising];
+    }
 }
 
 @end
