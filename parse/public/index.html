@@ -33,6 +33,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script language="javascript">
         Parse.initialize("LHPd3YWPRWnHYLdOPsynFpXnpl6jgVHt5pGSvLXN", "6jqeaemOXVHMJYEW3wulWuMP2Qe4f55f9eSnvwQG");
+		
+		// Event management
+		
+		var eventQuery = Parse.Query('Event');
+		eventQuery.first({
+		
+			success: function(object){
+			
+				_.extend(object, Parse.Event);
+				object.on('checkIn', function(){
+				// onTrigger stuff goes here
+				
+					console.log('checkIn event received');
+				
+				});
+			
+			},
+			
+			error: function(object, error){
+				console.log('Could not find event dispatcher.');
+			}
+		
+		});
 
         Parse.Cloud.run('getGuestList', {}, {
             success: function(result) {
