@@ -3,7 +3,7 @@
   <head>
     <title>Attendants</title>
     <style>
-        table {
+      table {
           border: 1px solid #666;   
           width: 100%;
       }
@@ -44,7 +44,7 @@
       }
 
       function drawRow(rowData) {
-          if(rowData.get("isCheckedIn") == true){
+          if(rowData.get("isCheckedIn") == false){
             var row = $("<tr />")
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append($("<input type=hidden class='guestID' name='checkedGuests[]' value='" + rowData.id + "'>"));
@@ -61,7 +61,6 @@
             Parse.Cloud.run('checkIn', {'userId':guestID}, {
             success: function(result) {
               window.location.reload();
-              
             },
             error: function(error) {
             }
@@ -82,6 +81,7 @@
     </script>
   </head>
   <body>
+
     <form>
     <table id="personDataTable">
     <tr>

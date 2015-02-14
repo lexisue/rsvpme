@@ -53,6 +53,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 Parse.Cloud.define("getGuestList", function(request, response) {
 
 	var query = new Parse.Query(Parse.User);
+	query.equalTo('isGuest', true);
 
 	query.find().then(function(results) {
 
