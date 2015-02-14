@@ -16,6 +16,7 @@
     IBOutlet UITextField* confirmCode;
     IBOutlet UIButton* loginButton;
     IBOutlet UILabel* attendanceLabel;
+    IBOutlet UILabel* welcomeLabel;
     
     IBOutlet UIImageView* checkmark;
     
@@ -26,5 +27,7 @@
 - (IBAction)doLogin:(id)sender;
 
 - (IBAction)doCheckIn:(id)sender;
+
+- (void)updateTitles;
 
 @end

@@ -18,13 +18,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
-    /*[ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
-        if (result) {
-            NSLog([result objectForKey:@"message"]);
-        }
-    }];*/
-    
     [self showOrHideCheckIn];
     
     attendanceLabel.text = @"";
@@ -32,6 +25,8 @@
     [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
         attendanceLabel.text = [result objectForKey:@"message"];
     }];
+    
+    [self updateTitles];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,10 +46,12 @@
         if (isCheckedIn) {
             checkInButton.hidden = YES;
             checkmark.hidden = NO;
+            welcomeLabel.hidden = YES;
         }
         else {
             checkInButton.hidden = NO;
             checkmark.hidden = YES;
+            welcomeLabel.hidden = NO;
         }
     }
     else {
@@ -62,6 +59,7 @@
         lastNameField.hidden = NO;
         confirmCode.hidden = NO;
         loginButton.hidden = NO;
+        welcomeLabel.hidden = YES;
         
         checkInButton.hidden = YES;
     }
@@ -86,6 +84,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser* user, NSError* error) {
         if (user) {
             [self showOrHideCheckIn];
+            [self updateTitles];
         }
         else {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Problem looking you up" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -125,6 +124,14 @@
             [alert show];
         }
     }];
+}
+
+- (void)updateTitles {
+    if ([PFUser currentUser]) {
+        PFUser* user = [PFUser currentUser];
+        self.navigationItem.title = @"Check In";
+        welcomeLabel.text = [NSString stringWithFormat:@"Welcome %@ %@", user[@"firstName"], user[@"lastName"]];
+    }
 }
 
 @end
