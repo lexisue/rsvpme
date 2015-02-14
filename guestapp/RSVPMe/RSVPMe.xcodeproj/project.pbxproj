@@ -36,6 +36,7 @@
 		FA9C992A1A8F4C1F005F1BA3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9C99291A8F4C1F005F1BA3 /* libsqlite3.dylib */; };
 		FA9C992D1A8F4C8A005F1BA3 /* ParseRest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C992C1A8F4C8A005F1BA3 /* ParseRest.m */; };
 		FA9C99801A8F81DA005F1BA3 /* greencheck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA9C997F1A8F81DA005F1BA3 /* greencheck.jpg */; };
+		FA9C99831A8F8402005F1BA3 /* PhotoStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9C99821A8F8402005F1BA3 /* PhotoStreamViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		FA9C992B1A8F4C8A005F1BA3 /* ParseRest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseRest.h; path = RSVPMe/ParseRest.h; sourceTree = "<group>"; };
 		FA9C992C1A8F4C8A005F1BA3 /* ParseRest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseRest.m; path = RSVPMe/ParseRest.m; sourceTree = "<group>"; };
 		FA9C997F1A8F81DA005F1BA3 /* greencheck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = greencheck.jpg; path = images/greencheck.jpg; sourceTree = "<group>"; };
+		FA9C99811A8F83F0005F1BA3 /* PhotoStreamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhotoStreamViewController.h; path = views/PhotoStreamViewController.h; sourceTree = "<group>"; };
+		FA9C99821A8F8402005F1BA3 /* PhotoStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoStreamViewController.m; path = views/PhotoStreamViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				FA9C99081A8F34D1005F1BA3 /* BaseViewController.m */,
 				FA9C99041A8F34BF005F1BA3 /* MainViewController.h */,
 				FA9C99051A8F34BF005F1BA3 /* MainViewController.m */,
+				FA9C99811A8F83F0005F1BA3 /* PhotoStreamViewController.h */,
+				FA9C99821A8F8402005F1BA3 /* PhotoStreamViewController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				FA9C98D71A8F331B005F1BA3 /* AppDelegate.m in Sources */,
 				FA9C99091A8F34D1005F1BA3 /* BaseViewController.m in Sources */,
 				FA9C98D41A8F331B005F1BA3 /* main.m in Sources */,
+				FA9C99831A8F8402005F1BA3 /* PhotoStreamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
