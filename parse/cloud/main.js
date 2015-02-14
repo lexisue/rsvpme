@@ -211,15 +211,15 @@ Parse.Cloud.define("registerEventListener", function(request, response){
 		var Event = Parse.Object.extend("Event");
 		var eventQuery = new Parse.Query(Event);
 		message = message + "eventQuery object created\n";
-		eventQuery.get("Jmv8CbL0P2", {
+		eventQuery.first({
 		
 			success: function(object){
-				
+			console.log(object.event);	
 				_.extend(object, Parse.Event);
 				object.on('checkIn', function(){
 				// onTrigger stuff goes here
 				
-					request.params();
+					request.params[0]();
 				
 				});
 				
