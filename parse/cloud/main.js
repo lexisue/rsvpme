@@ -201,3 +201,28 @@ Parse.Cloud.define("test", function(request, response) {
 		}
 	});
 });
+
+
+Parse.Cloud.define("registerEventListener", function(request, response){
+		// Event management
+		
+		var eventQuery = new Parse.Query('Event');
+		eventQuery.first({
+		
+			success: function(object){
+			
+				_.extend(object, Parse.Event);
+				object.on('checkIn', function(){
+				// onTrigger stuff goes here
+				
+					window.alert('checkIn event received');
+				
+				});
+			},
+			
+			error: function(object, error){
+				console.log('Could not find event dispatcher.');
+			}
+		
+		});
+});

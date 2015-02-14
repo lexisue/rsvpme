@@ -35,27 +35,17 @@
     <script language="javascript">
         Parse.initialize("LHPd3YWPRWnHYLdOPsynFpXnpl6jgVHt5pGSvLXN", "6jqeaemOXVHMJYEW3wulWuMP2Qe4f55f9eSnvwQG");
 		
-		// Event management
+        Parse.initialize("LHPd3YWPRWnHYLdOPsynFpXnpl6jgVHt5pGSvLXN", "6jqeaemOXVHMJYEW3wulWuMP2Qe4f55f9eSnvwQG");
 		
-		var eventQuery = new Parse.Query('Event');
-		eventQuery.first({
+		Parse.Cloud.run('registerEventListener', {}, {
 		
-			success: function(object){
-			
-				_.extend(object, Parse.Event);
-				object.on('checkIn', function(){
-				// onTrigger stuff goes here
-				
-					window.alert('checkIn event received');
-				
-				});
-			
+			success: function(result){
+				console.log('Listening for chackIn events.');
 			},
-			
-			error: function(object, error){
-				console.log('Could not find event dispatcher.');
+			error: function(error){
+				console.log('Could not register event listener.');
 			}
-		
+			
 		});
 
         Parse.Cloud.run('getGuestList', {}, {
