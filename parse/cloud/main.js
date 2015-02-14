@@ -1,5 +1,31 @@
 var _ = require('underscore.js');
 
+Parse.Cloud.define("checkIn", function(request, response) {
+	if (!request.params.user) {
+		response.error("user is missing");
+		return;
+	}
+
+	var user = request.params.user;
+	var query = new Parse.Query(Parse.User);
+	query.equalTo("objectId", user.id);
+	query.find({
+		success: function(object) {
+			object.set("isCheckedIn", true);
+			object.save().then(function(result) {
+				var toReturn = [];
+				toReturn.code = 200;
+				toReturn.user = result;
+				response.success(toReturn);
+			});
+		},
+		error: function(error) {
+			response.error(error);
+		}
+	});
+});
+
+
 Parse.Cloud.define("getGuestList", function(request, response) {
 
 	var query = new Parse.Query(Parse.User);
