@@ -140,6 +140,7 @@ Parse.Cloud.define("getGuestList", function(request, response) {
 
 	var query = new Parse.Query(Parse.User);
 	query.equalTo('isGuest', true);
+	query.ascending('lastName,firstName');
 
 	query.find().then(function(results) {
 
