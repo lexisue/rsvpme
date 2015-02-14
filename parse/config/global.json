@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "LexiSueParty": {
+            "applicationId": "LHPd3YWPRWnHYLdOPsynFpXnpl6jgVHt5pGSvLXN", 
+            "masterKey": "NESry7EXkc7TsOZit382R7RHRjnAUDTmdmw5UyzB"
+        }, 
+        "_default": {
+            "link": "LexiSueParty"
+        }
+    }
+}
