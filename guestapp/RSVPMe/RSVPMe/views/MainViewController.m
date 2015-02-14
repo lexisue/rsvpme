@@ -11,6 +11,7 @@
 #import "ParseRest.h"
 #import <Parse/Parse.h>
 #import "Constants.h"
+#import "RsvpMeStuff.h"
 
 @implementation MainViewController
 
@@ -97,33 +98,41 @@
 - (IBAction)doCheckIn:(id)sender {
     NSDictionary* params = @{@"userId": [PFUser currentUser].objectId};
     
-    [ParseRest callFunctionInBackground:@"checkIn" withParameters:params block:^(NSDictionary* result, NSError* error) {
-        if (result && !error) {
-            int code = [[result objectForKey:@"code"] intValue];
-            if (code == 200) {
-                NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setBool:YES forKey:CHECKED_IN_STRING];
-                [defaults synchronize];
-                
-                [self showOrHideCheckIn];
-                
-                // update the attendance
-                [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
-                    attendanceLabel.text = [result objectForKey:@"message"];
-                }];
+    
+    if ( [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
+        [ParseRest callFunctionInBackground:@"checkIn" withParameters:params block:^(NSDictionary* result, NSError* error) {
+            if (result && !error) {
+                int code = [[result objectForKey:@"code"] intValue];
+                if (code == 200) {
+                    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setBool:YES forKey:CHECKED_IN_STRING];
+                    [defaults synchronize];
+                    
+                    [self showOrHideCheckIn];
+                    
+                    // update the attendance
+                    [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
+                        attendanceLabel.text = [result objectForKey:@"message"];
+                    }];
+                }
+                else {
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"something failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    
+                    [alert show];
+                }
             }
-            else {
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"something failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            else if (error) {
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 
                 [alert show];
             }
-        }
-        else if (error) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            
-            [alert show];
-        }
-    }];
+        }];
+    }
+    else {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Too Far!" message:@"Please get closer to the party reception area" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+
 }
 
 - (void)updateTitles {

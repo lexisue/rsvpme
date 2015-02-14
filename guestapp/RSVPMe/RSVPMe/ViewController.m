@@ -6,9 +6,14 @@
 //  Copyright (c) 2015 Gopher Apps LLC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ViewController.h"
+#import "RsvpMeStuff.h"
 
-@interface ViewController ()
+@interface ViewController () {
+    AppDelegate* appDelegate;
+    CLProximity lastProximity;
+}
 
 @end
 
@@ -18,6 +23,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+        lastProximity = CLProximityUnknown;
     }
     return self;
 }
@@ -27,15 +34,37 @@
     
     self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"checkIn"];
     
-    // Do any additional setup after loading the view.
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self initRegion];
-    [self locationManager:self.locationManager didStartMonitoringForRegion:self.beaconRegion];
-    if ([self.locationManager respondsToSelector:
-         @selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
+    BOOL locationEnabled = YES;
+    if(![CLLocationManager locationServicesEnabled]) {
+        //You need to enable Location Services
+        locationEnabled = NO;
     }
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
+        //Region monitoring is not available for this Class;
+        locationEnabled = NO;
+    }
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ||
+       [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
+        //You need to authorize Location Services for the APP
+        locationEnabled = NO;
+    }
+    
+    if ( !locationEnabled ) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Please enable location services" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else {
+        // Do any additional setup after loading the view.
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self initRegion];
+        [self locationManager:self.locationManager didStartMonitoringForRegion:self.beaconRegion];
+        if ([self.locationManager respondsToSelector:
+             @selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+    }
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -64,28 +93,37 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    CLBeacon *beacon = [[CLBeacon alloc] init];
-    beacon = [beacons lastObject];
-    
-    self.beaconFoundLabel.text = @"Yes";
-    self.proximityUUIDLabel.text = beacon.proximityUUID.UUIDString;
-    self.majorLabel.text = [NSString stringWithFormat:@"%@", beacon.major];
-    self.minorLabel.text = [NSString stringWithFormat:@"%@", beacon.minor];
-    self.accuracyLabel.text = [NSString stringWithFormat:@"%f", beacon.accuracy];
-    if (beacon.proximity == CLProximityUnknown) {
-        self.distanceLabel.text = @"Unknown Proximity";
-    } else if (beacon.proximity == CLProximityImmediate) {
-        self.distanceLabel.text = @"Immediate";
-    } else if (beacon.proximity == CLProximityNear) {
-        self.distanceLabel.text = @"Near";
-    } else if (beacon.proximity == CLProximityFar) {
-        self.distanceLabel.text = @"Far";
+    //CLBeacon *beacon = [[CLBeacon alloc] init];
+    CLBeacon *beacon = [beacons lastObject];
+    if ( beacon.proximity != lastProximity ) {
+        RsvpMeStuff* rsvpStuff = [RsvpMeStuff sharedRsvpMeStuff];
+        if (beacon.proximity == CLProximityUnknown) {
+            NSLog(@"Unknown Proximity");
+            rsvpStuff.isNearEnough = NO;
+        }
+        else if (beacon.proximity == CLProximityImmediate) {
+            NSLog(@"Immediate");
+            rsvpStuff.isNearEnough = YES;
+        }
+        else if (beacon.proximity == CLProximityNear) {
+            NSLog(@"Near");
+            rsvpStuff.isNearEnough = YES;
+        }
+        else if (beacon.proximity == CLProximityFar) {
+            NSLog(@"Far");
+            rsvpStuff.isNearEnough = NO;
+        }
     }
-    self.rssiLabel.text = [NSString stringWithFormat:@"%i", beacon.rssi];
+    lastProximity = beacon.proximity;
+    //NSLog(@"%ld", beacon.rssi);
+}
+
+- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
+    NSLog(@"rangingBeaconsDidFailForRegion: %@", error);
 }
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
-    NSLog(@"Error: %@", error);
+    NSLog(@"monitoringDidFailForRegion: %@", error);
 }
 
 - (void)didReceiveMemoryWarning {
