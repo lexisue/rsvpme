@@ -17,21 +17,24 @@ Parse.Cloud.define("checkIn", function(request, response) {
 				success: function(result) {
 					var pushQuery = new Parse.Query(Parse.Installation);
 					pushQuery.equalTo('deviceType', 'ios');
-					    
-					Parse.Push.send({
-					  where: pushQuery, // Set our Installation query
-					  data: {
-					    alert: result.get('firstName') + ' ' + result.get('lastName') + ' just checked in!'
-					  }
-					}, {
-					  success: function() {
-					    // Push was successful
-					    console.log('Push success');
-					  },
-					  error: function(error) {
-					    throw "Got an error " + error.code + " : " + error.message;
-					  }
-					});
+
+					// send a push if they're on the watch list
+					if (result.get('shouldPush') == true) {
+						Parse.Push.send({
+						  where: pushQuery, // Set our Installation query
+						  data: {
+						    alert: result.get('firstName') + ' ' + result.get('lastName') + ' just checked in!'
+						  }
+						}, {
+						  success: function() {
+						    // Push was successful
+						    console.log('Push success');
+						  },
+						  error: function(error) {
+						    throw "Got an error " + error.code + " : " + error.message;
+						  }
+						});
+					}
 
 					var toReturn = {};
 					toReturn.code = 200;
