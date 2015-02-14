@@ -12,6 +12,10 @@
 
 @interface PhotoStreamViewController : UICollectionViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate> {
     UIRefreshControl* refreshControl;
+    
+    NSMutableArray* imageArray;
+    
+    BOOL isRefreshing;
 }
 
 - (IBAction)showMenu:(id)sender;
