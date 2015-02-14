@@ -44,6 +44,20 @@ Parse.Cloud.define("checkIn", function(request, response) {
 					toReturn.user = result;
 					//response.success(toReturn);
 
+					// Event management on a successful check in
+					var eventQuery = new Parse.Query('Event');
+					eventQuery.first({
+					
+						success: function(object){
+							_.extend(object, Parse.Events);
+							object.trigger('checkIn');
+						},
+						
+						error: function(object, error){
+							response.error('Could not find event dispatcher.');
+						}
+					});
+
 
 					var checkedInQuery = new Parse.Query(Parse.User);
 					checkedInQuery.equalTo('isGuest', true);
@@ -117,22 +131,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 			response.error(error);
 		}
 		
-		// Event management
 		
-		var eventQuery = new Parse.Query('Event');
-		eventQuery.first({
-		
-			success: function(){
-				_.extend(object, Parse.Events);
-				object.trigger('checkIn');
-			},
-			
-			error: function(object, error){
-				response.error('Could not find event dispatcher.');
-			}
-			
-		
-		});
 	});
 });
 

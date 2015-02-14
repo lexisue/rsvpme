@@ -36,7 +36,7 @@
 		
 		// Event management
 		
-		var eventQuery = Parse.Query('Event');
+		var eventQuery = new Parse.Query('Event');
 		eventQuery.first({
 		
 			success: function(object){
@@ -45,7 +45,7 @@
 				object.on('checkIn', function(){
 				// onTrigger stuff goes here
 				
-					console.log('checkIn event received');
+					window.alert('checkIn event received');
 				
 				});
 			
