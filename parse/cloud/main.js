@@ -50,6 +50,7 @@ Parse.Cloud.define("getGuestList", function(request, response) {
 Parse.Cloud.define("attendance", function(request, response){
 
 	var query = new Parse.Query(Parse.User);
+	query.equalTo('isGuest', true);
 	var total;
 	var attend;
 
@@ -58,6 +59,7 @@ Parse.Cloud.define("attendance", function(request, response){
 
 		var checkedInQuery = new Parse.Query(Parse.User);
 		checkedInQuery.equalTo('isCheckedIn', true);
+		checkedInQuery.equalTo('isGuest', true);
 
 		checkedInQuery.count().then(function(count) {
 
