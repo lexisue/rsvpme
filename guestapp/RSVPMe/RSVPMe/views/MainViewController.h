@@ -17,6 +17,8 @@
     IBOutlet UIButton* loginButton;
     IBOutlet UILabel* attendanceLabel;
     
+    IBOutlet UIImageView* checkmark;
+    
 }
 
 - (void)showOrHideCheckIn;

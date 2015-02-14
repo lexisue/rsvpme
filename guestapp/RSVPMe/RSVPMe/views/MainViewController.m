@@ -50,9 +50,11 @@
         
         if (isCheckedIn) {
             checkInButton.hidden = YES;
+            checkmark.hidden = NO;
         }
         else {
             checkInButton.hidden = NO;
+            checkmark.hidden = YES;
         }
     }
     else {
