@@ -52,24 +52,24 @@ Parse.Cloud.define("attendance", function(request, response){
 	var query = new Parse.Query(Parse.User);
 	var total;
 	var attend;
-	
-	query.find().then(function(results){
-		total = results.length;
-	}), function(error){
-		response.error('Error querying users');
-		return;
-	}
-	
-	query.equalTo('isCheckedIn', 'true');
 
-		query.find().then(function(results){
-		attend = results.length;
-		
-		var toReturn = {};
-		toReturn.message = attend + ' attending, ' + total + ' total';
-		response.success(toReturn);
-	}), function(error){
-		response.error('Error querying users');
+	query.count().then(function(count) {
+		total = count;
+
+		var checkedInQuery = new Parse.Query(Parse.User);
+		checkedInQuery.equalTo('isCheckedIn', true);
+
+		checkedInQuery.count().then(function(count) {
+
+			var toReturn = {};
+			toReturn.code = 200;
+			toReturn.message = count + ' out of ' + total + ' are already here!';
+			response.success(toReturn);
+		}), function (error) {
+			response.error('Error getting checked in');
+		}
+	}), function(error) {
+		response.error('Error counting');
 	}
 	
 });
