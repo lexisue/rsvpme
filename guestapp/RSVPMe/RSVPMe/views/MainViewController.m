@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MainViewController.h"
-#import "Parse.h"
+#import "ParseRest.h"
 
 @implementation MainViewController
 
@@ -17,7 +17,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    [Parse callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
+    [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
         if (result) {
             NSLog([result objectForKey:@"message"]);
         }
