@@ -42,10 +42,10 @@ Parse.Cloud.define("checkIn", function(request, response) {
 					var toReturn = {};
 					toReturn.code = 200;
 					toReturn.user = result;
-					response.success(toReturn);
+					//response.success(toReturn);
 
-					// get a count and see % thresholds
-					/*var checkedInQuery = new Parse.Query(Parse.User);
+
+					var checkedInQuery = new Parse.Query(Parse.User);
 					checkedInQuery.equalTo('isGuest', true);
 					checkedInQuery.find({
 						success: function(results) {
@@ -89,6 +89,10 @@ Parse.Cloud.define("checkIn", function(request, response) {
 										  }
 										});
 									}
+									else {
+										// no thresold to push so just return
+										response.success(toReturn);
+									}
 								},
 								error: function(error) {
 									console.error('Problem getting thresholds');
@@ -100,7 +104,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 							console.error('Error trying to determine percentage checked in');
 							response.success(toReturn);
 						}
-					});*/
+					});
 
 					
 				},
