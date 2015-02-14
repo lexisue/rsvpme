@@ -72,7 +72,7 @@
     [lastNameField resignFirstResponder];
     [confirmCode resignFirstResponder];
     
-    NSString* username = [NSString stringWithFormat:@"%@%@", confirmCode.text, lastNameField.text];
+    NSString* username = [NSString stringWithFormat:@"%@%@", [confirmCode.text uppercaseString], [lastNameField.text uppercaseString]];
     
     if ([confirmCode.text length] == 0 || [lastNameField.text length] == 0) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing fields" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
