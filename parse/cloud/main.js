@@ -47,7 +47,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 					// Event management on a successful check in
 					var Event = Parse.Object.extend("Event");
 					var eventQuery = new Parse.Query(Event);
-					eventQuery.get('Jmv8CbL0P2', {
+					eventQuery.get("Jmv8CbL0P2", {
 					
 						success: function(object){
 							_.extend(object, Parse.Events);
@@ -211,7 +211,7 @@ Parse.Cloud.define("registerEventListener", function(request, response){
 		var Event = Parse.Object.extend("Event");
 		var eventQuery = new Parse.Query(Event);
 		message = message + "eventQuery object created\n";
-		eventQuery.get('Jmv8CbL0P2', {
+		eventQuery.get("Jmv8CbL0P2", {
 		
 			success: function(object){
 				
@@ -219,14 +219,17 @@ Parse.Cloud.define("registerEventListener", function(request, response){
 				object.on('checkIn', function(){
 				// onTrigger stuff goes here
 				
-					window.alert('checkIn event received');
+					request.params();
 				
 				});
+				
+				response.success();
 			},
 			
 			error: function(object, error){
 				
 				console.log('Could not find event dispatcher.');
+				response.error();
 			}
 		
 		});
