@@ -12,15 +12,14 @@
 
 
 #define RSVPME_UUID @"0494E11D-0BAC-43E6-B570-2AF6D36F8562"
-#define RSVPME_IDENTIFIER @"com.gopherapps.rsvpme"
+#define RSVPME_IDENTIFIER @"com.rsvpme"
 
-@interface ViewController : ECSlidingViewController <CLLocationManagerDelegate>
+@interface ViewController : ECSlidingViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
 
 
-@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
-@property (strong, nonatomic) CLLocationManager *locationManager;
+- (void)monitorLocation:(NSDictionary*)dictionary;
 
--(void)initRegion;
+- (CLLocationDistance)calculateDistanceInMetersBetweenCoord:(CLLocationCoordinate2D)coord1 coord:(CLLocationCoordinate2D)coord2;
 
 @end
 

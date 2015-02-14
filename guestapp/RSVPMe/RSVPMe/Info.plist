@@ -30,6 +30,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSLocationUsageDescription</key>
+	<string>RSVPMe would like to use your location services</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>RSVPMe would like to use your location services</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
