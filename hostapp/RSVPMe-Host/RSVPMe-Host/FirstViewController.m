@@ -20,6 +20,15 @@
     // Do any additional setup after loading the view, typically from a nib.    
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://rsvpmehack.parseapp.com/checkedIn.html"]]];
     webView.delegate = self;
+    UIView *firstView = [webView.subviews firstObject];
+    
+    if ([firstView isKindOfClass:[UIScrollView class]]) {
+        
+        UIScrollView *scroll = (UIScrollView*)firstView;
+        [scroll setScrollEnabled:NO];  //to stop scrolling completely
+        [scroll setBounces:NO]; //to stop bouncing
+        
+    }
 
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate transmitBeacon];

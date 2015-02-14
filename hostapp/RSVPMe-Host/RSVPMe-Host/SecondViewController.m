@@ -20,6 +20,15 @@
     
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://rsvpmehack.parseapp.com/index.html"]]];
     webView.delegate = self;
+    
+    UIView *firstView = [webView.subviews firstObject];
+    if ([firstView isKindOfClass:[UIScrollView class]]) {
+        
+        UIScrollView *scroll = (UIScrollView*)firstView;
+        [scroll setScrollEnabled:NO];  //to stop scrolling completely
+        [scroll setBounces:NO]; //to stop bouncing
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
