@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : UIViewController <UIWebViewDelegate> {
+    IBOutlet UIWebView* webView;
+}
 
 
 @end

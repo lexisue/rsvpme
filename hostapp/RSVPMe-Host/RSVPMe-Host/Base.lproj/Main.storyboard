@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Check in-->
@@ -29,16 +30,27 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pRQ-mV-JGH">
+                                <rect key="frame" x="0.0" y="-8" width="600" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
+                            <constraint firstItem="pRQ-mV-JGH" firstAttribute="centerX" secondItem="A5M-7J-77L" secondAttribute="centerX" id="7RY-zg-ZHd"/>
+                            <constraint firstItem="pRQ-mV-JGH" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="ALF-br-Anq"/>
+                            <constraint firstItem="pRQ-mV-JGH" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" constant="-8" id="ZmM-t7-PXO"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
+                            <constraint firstItem="pRQ-mV-JGH" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="zDs-fK-nNS"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Check in" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="webView" destination="pRQ-mV-JGH" id="P6U-hy-Vxc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -69,16 +81,27 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAl-1h-3BL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
+                            <constraint firstItem="PAl-1h-3BL" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="Haq-fk-Zam"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
+                            <constraint firstItem="PAl-1h-3BL" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="bqb-jS-hpo"/>
+                            <constraint firstItem="PAl-1h-3BL" firstAttribute="bottom" secondItem="Djb-ko-YwX" secondAttribute="top" id="nAg-6C-5je"/>
+                            <constraint firstItem="PAl-1h-3BL" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="pLB-RJ-I0R"/>
                             <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Attendance" image="second" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="webView" destination="PAl-1h-3BL" id="8Vx-Xm-aY1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
