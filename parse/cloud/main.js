@@ -171,7 +171,7 @@ Parse.Cloud.define("attendance", function(request, response){
 
 			var toReturn = {};
 			toReturn.code = 200;
-			toReturn.message = count + ' out of ' + total + ' guests are already here!';
+			toReturn.message = count + ' of ' + total + ' guests are already here!';
 			response.success(toReturn);
 		}), function (error) {
 			response.error('Error getting checked in');
