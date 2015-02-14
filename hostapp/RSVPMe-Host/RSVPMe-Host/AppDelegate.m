@@ -48,8 +48,6 @@
 
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:RSVPME_UUID];
     _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-                                                            major:1
-                                                            minor:1
                                                        identifier:RSVPME_IDENTIFIER];
     
     
