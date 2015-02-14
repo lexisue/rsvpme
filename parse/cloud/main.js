@@ -15,6 +15,24 @@ Parse.Cloud.define("checkIn", function(request, response) {
 
 			foundUser.save(null, {
 				success: function(result) {
+					var pushQuery = new Parse.Query(Parse.Installation);
+					pushQuery.equalTo('deviceType', 'ios');
+					    
+					Parse.Push.send({
+					  where: pushQuery, // Set our Installation query
+					  data: {
+					    alert: result.get('firstName') + ' ' + result.get('lastName') + ' just checked in!'
+					  }
+					}, {
+					  success: function() {
+					    // Push was successful
+					    console.log('Push success');
+					  },
+					  error: function(error) {
+					    throw "Got an error " + error.code + " : " + error.message;
+					  }
+					});
+
 					var toReturn = {};
 					toReturn.code = 200;
 					toReturn.user = result;
