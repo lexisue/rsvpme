@@ -37,13 +37,16 @@
 		
         Parse.initialize("LHPd3YWPRWnHYLdOPsynFpXnpl6jgVHt5pGSvLXN", "6jqeaemOXVHMJYEW3wulWuMP2Qe4f55f9eSnvwQG");
 		
-		Parse.Cloud.run('registerEventListener', {}, {
+		Parse.Cloud.run('registerEventListener', function(){
+			window.alert('Check in');
+		
+		}, {
 		
 			success: function(result){
-				console.log('Listening for chackIn events.');
+				console.log('Listening for checkIn events.');
 			},
 			error: function(error){
-				console.log('Could not register event listener.');
+				console.log(error);
 			}
 			
 		});
