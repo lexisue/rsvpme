@@ -42,10 +42,25 @@ Parse.Cloud.define("checkIn", function(request, response) {
 					var toReturn = {};
 					toReturn.code = 200;
 					toReturn.user = result;
-					response.success(toReturn);
+					//response.success(toReturn);
 
-					// get a count and see % thresholds
-					/*var checkedInQuery = new Parse.Query(Parse.User);
+					// Event management on a successful check in
+					var Event = Parse.Object.extend("Event");
+					var eventQuery = new Parse.Query(Event);
+					eventQuery.get('Jmv8CbL0P2', {
+					
+						success: function(object){
+							_.extend(object, Parse.Events);
+							object.trigger('checkIn');
+						},
+						
+						error: function(object, error){
+							response.error('Could not find event dispatcher.');
+						}
+					});
+
+
+					var checkedInQuery = new Parse.Query(Parse.User);
 					checkedInQuery.equalTo('isGuest', true);
 					checkedInQuery.find({
 						success: function(results) {
@@ -89,6 +104,10 @@ Parse.Cloud.define("checkIn", function(request, response) {
 										  }
 										});
 									}
+									else {
+										// no thresold to push so just return
+										response.success(toReturn);
+									}
 								},
 								error: function(error) {
 									console.error('Problem getting thresholds');
@@ -100,7 +119,7 @@ Parse.Cloud.define("checkIn", function(request, response) {
 							console.error('Error trying to determine percentage checked in');
 							response.success(toReturn);
 						}
-					});*/
+					});
 
 					
 				},
@@ -112,6 +131,8 @@ Parse.Cloud.define("checkIn", function(request, response) {
 		error: function(error) {
 			response.error(error);
 		}
+		
+		
 	});
 });
 
@@ -120,6 +141,7 @@ Parse.Cloud.define("getGuestList", function(request, response) {
 
 	var query = new Parse.Query(Parse.User);
 	query.equalTo('isGuest', true);
+	query.ascending('lastName,firstName');
 
 	query.find().then(function(results) {
 
@@ -150,7 +172,7 @@ Parse.Cloud.define("attendance", function(request, response){
 
 			var toReturn = {};
 			toReturn.code = 200;
-			toReturn.message = count + ' out of ' + total + ' guests are already here!';
+			toReturn.message = count + ' of ' + total + ' guests are already here!';
 			response.success(toReturn);
 		}), function (error) {
 			response.error('Error getting checked in');
@@ -179,4 +201,33 @@ Parse.Cloud.define("test", function(request, response) {
 			response.error(error);
 		}
 	});
+});
+
+
+Parse.Cloud.define("registerEventListener", function(request, response){
+		// Event management
+		var message = "";
+		
+		var Event = Parse.Object.extend("Event");
+		var eventQuery = new Parse.Query(Event);
+		message = message + "eventQuery object created\n";
+		eventQuery.get('Jmv8CbL0P2', {
+		
+			success: function(object){
+				
+				_.extend(object, Parse.Event);
+				object.on('checkIn', function(){
+				// onTrigger stuff goes here
+				
+					window.alert('checkIn event received');
+				
+				});
+			},
+			
+			error: function(object, error){
+				
+				console.log('Could not find event dispatcher.');
+			}
+		
+		});
 });

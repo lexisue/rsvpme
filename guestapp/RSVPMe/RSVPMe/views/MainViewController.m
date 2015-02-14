@@ -19,13 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
-    /*[ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
-        if (result) {
-            NSLog([result objectForKey:@"message"]);
-        }
-    }];*/
-    
     [self showOrHideCheckIn];
     
     attendanceLabel.text = @"";
@@ -40,6 +33,8 @@
     else {
         NSLog(@"not near");
     }
+    
+    [self updateTitles];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,10 +54,12 @@
         if (isCheckedIn) {
             checkInButton.hidden = YES;
             checkmark.hidden = NO;
+            welcomeLabel.hidden = YES;
         }
         else {
             checkInButton.hidden = NO;
             checkmark.hidden = YES;
+            welcomeLabel.hidden = NO;
         }
     }
     else {
@@ -70,6 +67,7 @@
         lastNameField.hidden = NO;
         confirmCode.hidden = NO;
         loginButton.hidden = NO;
+        welcomeLabel.hidden = YES;
         
         checkInButton.hidden = YES;
     }
@@ -80,7 +78,7 @@
     [lastNameField resignFirstResponder];
     [confirmCode resignFirstResponder];
     
-    NSString* username = [NSString stringWithFormat:@"%@%@", confirmCode.text, lastNameField.text];
+    NSString* username = [NSString stringWithFormat:@"%@%@", [confirmCode.text uppercaseString], [lastNameField.text uppercaseString]];
     
     if ([confirmCode.text length] == 0 || [lastNameField.text length] == 0) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing fields" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -94,6 +92,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser* user, NSError* error) {
         if (user) {
             [self showOrHideCheckIn];
+            [self updateTitles];
         }
         else {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Problem looking you up" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -143,5 +142,12 @@
 
 }
 
+- (void)updateTitles {
+    if ([PFUser currentUser]) {
+        PFUser* user = [PFUser currentUser];
+        self.navigationItem.title = @"Check In";
+        welcomeLabel.text = [NSString stringWithFormat:@"Welcome %@ %@", user[@"firstName"], user[@"lastName"]];
+    }
+}
 
 @end

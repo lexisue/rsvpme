@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    imageArray = [NSMutableArray array];
+    
     // setup the menu
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
         self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
@@ -32,6 +34,8 @@
     [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
     self.collectionView.alwaysBounceVertical = YES;
     [self.collectionView addSubview:refreshControl];
+    
+    [self loadImages];
 }
 
 - (IBAction)showMenu:(id)sender {
@@ -39,11 +43,31 @@
 }
 
 - (void)handleRefresh:(id)sender {
-    
+    [self loadImages];
 }
 
 - (void)loadImages {
+    if (isRefreshing) {
+        return;
+    }
     
+    isRefreshing = YES;
+    PFQuery* query = [PFQuery queryWithClassName:@"Image"];
+    [query addDescendingOrder:@"updatedAt"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray* results, NSError* error) {
+        if (!error) {
+            [imageArray removeAllObjects];
+            
+            [imageArray addObjectsFromArray:results];
+            
+            [self.collectionView reloadData];
+            
+            [refreshControl endRefreshing];
+            
+        }
+        isRefreshing = NO;
+    }];
 }
 
 - (IBAction)addPhoto:(id)sender {
@@ -57,8 +81,6 @@
     cameraUI.allowsEditing = NO;
     cameraUI.delegate = self;
     
-    
-    //http://stackoverflow.com/questions/24854802/presenting-a-view-controller-modally-from-an-action-sheets-delegate-in-ios8
     dispatch_async(dispatch_get_main_queue(), ^ {
         [self presentViewController:cameraUI animated:YES completion:nil];
     });
@@ -106,6 +128,54 @@
     }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark UICollectionViewDataSource delegate
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [imageArray count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell1" forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor grayColor];
+    
+    PFFile* imageFile = [[imageArray objectAtIndex:indexPath.row] objectForKey:@"imageFile"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData* data, NSError* error) {
+        if (!error) {
+            UIImageView* cellView = (UIImageView*) [cell.contentView viewWithTag:3];
+            cellView.image = [UIImage imageWithData:data];
+        }
+    }];
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize toReturn = CGSizeMake(105, 105);
+    
+    if ((indexPath.row % 2) == 0) {
+        //toReturn = CGSizeMake(60, 40);
+    }
+    
+    return toReturn;
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    /*if (!isEditingMode) {
+        [self performSegueWithIdentifier:@"showDetail" sender:nil];
+    }
+    else {
+        [self removeCellButtonPressed];
+    }*/
 }
 
 @end
