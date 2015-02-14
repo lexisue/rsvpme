@@ -11,7 +11,7 @@
 #import "ParseRest.h"
 #import <Parse/Parse.h>
 #import "Constants.h"
-#import "AppDelegate.h"
+#import "RsvpMeStuff.h"
 
 @implementation MainViewController
 
@@ -26,13 +26,6 @@
     [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
         attendanceLabel.text = [result objectForKey:@"message"];
     }];
-    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if ( appDelegate.itIsNearEnough ) {
-        NSLog(@"isNearEnough");
-    }
-    else {
-        NSLog(@"not near");
-    }
     
     [self updateTitles];
 }
@@ -105,8 +98,8 @@
 - (IBAction)doCheckIn:(id)sender {
     NSDictionary* params = @{@"userId": [PFUser currentUser].objectId};
     
-    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    if ( appDelegate.itIsNearEnough ) {
+    
+    if ( [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
         [ParseRest callFunctionInBackground:@"checkIn" withParameters:params block:^(NSDictionary* result, NSError* error) {
             if (result && !error) {
                 int code = [[result objectForKey:@"code"] intValue];

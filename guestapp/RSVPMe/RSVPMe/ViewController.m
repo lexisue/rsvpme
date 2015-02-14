@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "RsvpMeStuff.h"
 
 @interface ViewController () {
     AppDelegate* appDelegate;
@@ -95,28 +96,23 @@
     //CLBeacon *beacon = [[CLBeacon alloc] init];
     CLBeacon *beacon = [beacons lastObject];
     if ( beacon.proximity != lastProximity ) {
+        RsvpMeStuff* rsvpStuff = [RsvpMeStuff sharedRsvpMeStuff];
         if (beacon.proximity == CLProximityUnknown) {
             NSLog(@"Unknown Proximity");
-            appDelegate.itIsNearEnough = NO;
+            rsvpStuff.isNearEnough = NO;
         }
         else if (beacon.proximity == CLProximityImmediate) {
             NSLog(@"Immediate");
-            appDelegate.itIsNearEnough = YES;
+            rsvpStuff.isNearEnough = YES;
         }
         else if (beacon.proximity == CLProximityNear) {
             NSLog(@"Near");
-            appDelegate.itIsNearEnough = YES;
+            rsvpStuff.isNearEnough = YES;
         }
         else if (beacon.proximity == CLProximityFar) {
             NSLog(@"Far");
-            appDelegate.itIsNearEnough = NO;
+            rsvpStuff.isNearEnough = NO;
         }
-    }
-    if (appDelegate.itIsNearEnough ) {
-        NSLog(@"is near enough");
-    }
-    else {
-        NSLog(@"nope");
     }
     lastProximity = beacon.proximity;
     //NSLog(@"%ld", beacon.rssi);
