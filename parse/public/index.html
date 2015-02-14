@@ -58,22 +58,47 @@
             error: function(error) {
             }
         });
+		
+	  function updateTable(){
+	  
+	    Parse.Cloud.run('getGuestList', {}, {
+            success: function(result) {
+				for each(var person in result.items){
+					var tableRows = $(#personDataTable).children("tr");
+					for each(var row in tableRows){
+						if(row.children("td:nth-child(1)") == person.get("firstName") && row.children("td:nth-child(2)") == person.get("lastName")){
+							if(person.get("isCheckedIn")){
+								row.css("backgroundColor", "gray");
+							}
+							else{
+								row.css("backgroundColor", "white");
+							}
+						}
+					}
+				}
+            },
+            error: function(error) {
+				console.log("Failed to retrieve table data.");
+            }
+        });
+	  }
 
 
       function drawTable(data) {
           for (var i = 0; i < data.length; i++) {
               drawRow(data[i]);
           }
+		  updateTable();
       }
 
       function drawRow(rowData) {
-          if(rowData.get("isCheckedIn") == true){
+  //        if(rowData.get("isCheckedIn") == true){
             var row = $("<tr />")
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append($("<input type=hidden class='guestID' name='checkedGuests[]' value='" + rowData.id + "'>"));
             row.append($("<td>" + rowData.get("firstName") + "</td>"));
             row.append($("<td>" + rowData.get("lastName")+ "</td>"));
-          }
+ //         }
       }
       jQuery(document).ready(function($){
         $("form").on("submit", function(e){
