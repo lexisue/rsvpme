@@ -5,22 +5,27 @@
     <style>
       table {
           border: 1px solid #666;   
-          width: 100%;
+          width: 100%;        
       }
-      th {
+      th{
         background: #f8f8f8; 
         font-weight: bold;    
         padding: 2px;
-    }
-     .rowSelected{
-       background: red;
-     }
-     body{
-       padding-top: 44px;
-     }
-     td{
-      text-align: center;
-     }
+      }
+      .rowSelected{
+        background: red;
+      }
+      body{
+        padding-top: 44px;
+      }
+      td{
+        text-align: center;
+      }
+
+      .scroll {
+        max-height: 100%;
+        overflow: auto;
+      } 
 
     </style>
     <script src="//www.parsecdn.com/js/parse-1.3.4.min.js"></script>
@@ -83,14 +88,15 @@
   <body>
 
     <form>
+  <div class="scroll">
     <table id="personDataTable">
     <tr>
 
         <th>First Name</th>
         <th>Last Name</th>
-    </tr>
-    
-</table>
+    </tr>  
+    </table>
+  </div>
   <center><input type="submit" value="check-in"></center>
   </form>
   </body>
