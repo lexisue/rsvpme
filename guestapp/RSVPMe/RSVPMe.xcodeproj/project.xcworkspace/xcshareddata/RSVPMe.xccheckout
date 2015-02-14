@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DF190B3A-2EEC-4943-95DB-0D98356C51F7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RSVPMe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5EBABB968BE2C88776D0C294A4CEF938F520D77B</key>
+		<string>https://github.com/lexisue/rsvpme</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>guestapp/RSVPMe/RSVPMe.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5EBABB968BE2C88776D0C294A4CEF938F520D77B</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lexisue/rsvpme</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5EBABB968BE2C88776D0C294A4CEF938F520D77B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5EBABB968BE2C88776D0C294A4CEF938F520D77B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rsvpme</string>
+		</dict>
+	</array>
+</dict>
+</plist>
