@@ -63,15 +63,15 @@
 	  
 	    Parse.Cloud.run('getGuestList', {}, {
             success: function(result) {
-				for each(var person in result.items){
+				for(var i; i < result.items.length; i++){
 					var tableRows = $(#personDataTable).children("tr");
-					for each(var row in tableRows){
-						if(row.children("td:nth-child(1)") == person.get("firstName") && row.children("td:nth-child(2)") == person.get("lastName")){
-							if(person.get("isCheckedIn")){
-								row.css("backgroundColor", "gray");
+					for(var j = 0; j < tableRows.length; j++){
+						if(tableRows[j].children("td:nth-child(1)") == result.items[i].get("firstName") && tableRows[j].children("td:nth-child(2)") == result.items[i].get("lastName")){
+							if(result.items[i].get("isCheckedIn")){
+								tableRows[j].css("backgroundColor", "gray");
 							}
 							else{
-								row.css("backgroundColor", "white");
+								tableRows[j].css("backgroundColor", "white");
 							}
 						}
 					}
