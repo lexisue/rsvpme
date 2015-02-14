@@ -15,6 +15,31 @@ Parse.Cloud.define("getGuestList", function(request, response) {
 	}
 });
 
+Parse.Cloud.define("attendance", function(request, response){
+
+	var query = new Parse.Query(Parse.User);
+	var total;
+	var attend;
+	
+	query.find().then(function(results){
+		total = results.length;
+	}), function(error){
+		response.error('Error querying users');
+		return;
+	}
+	
+	query.equalTo('isCheckedIn', 'true');
+
+		query.find().then(function(results){
+		attend = results.length;
+		
+		response.success(attend + ' attending, ' + total + ' total');
+	}), function(error){
+		response.error('Error querying users');
+	}
+	
+}
+
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
