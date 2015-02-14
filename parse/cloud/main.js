@@ -84,10 +84,18 @@ Parse.Cloud.define("checkIn", function(request, response) {
 									var shouldSend = 0;
 
 									if (result) {
-										var percentagePushQuery = new Parse.Query(Parse.Installation);
+										var percentagePushHostQuery = new Parse.Query(Parse.Installation);
 										percentagePushQuery.equalTo('deviceType', 'ios');
+										percentagePushQuery.equalTo('channels', 'hostApp');
+
+										var percentagePushGuestQuery = new Parse.Query(Parse.Installation);
+										percentagePushGuestQuery.equalTo('deviceType', 'ios');
+										percentagePushGuestQuery.equalTo('channels', 'guestApp');
+
+										var toPushQuery = Parse.Query.or(percentagePushHostQuery, percentagePushGuestQuery);
+
 										Parse.Push.send({
-										  where: percentagePushQuery, // Set our Installation query
+										  where: toPushQuery, // Set our Installation query
 										  data: {
 										    alert: '' + result.get('percentageText') + ' of the guests has already checked in!'
 										  }
