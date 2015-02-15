@@ -58,8 +58,6 @@
             checkInButton.hidden = YES;
             checkmark.hidden = NO;
             welcomeLabel.hidden = YES;
-
-            [soundEffect play];
         }
         else {
             checkInButton.hidden = NO;
@@ -133,6 +131,7 @@
                     [defaults synchronize];
                     
                     [self showOrHideCheckIn];
+                    [soundEffect play];
                     
                     // update the attendance
                     [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
