@@ -123,7 +123,7 @@
     NSDictionary* params = @{@"userId": [PFUser currentUser].objectId};
     
     
-    if ( YES || [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
+    if ( [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
         [ParseRest callFunctionInBackground:@"checkIn" withParameters:params block:^(NSDictionary* result, NSError* error) {
             if (result && !error) {
                 int code = [[result objectForKey:@"code"] intValue];
