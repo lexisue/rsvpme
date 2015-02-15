@@ -59,28 +59,21 @@
             }
         });
 		
-	  function updateTable(){
-	  
-	    Parse.Cloud.run('getGuestList', {}, {
-            success: function(result) {
-				for(var i; i < result.items.length; i++){
-					var tableRows = $(#personDataTable).children("tr");
-					for(var j = 0; j < tableRows.length; j++){
-						if(tableRows[j].children("td:nth-child(1)") == result.items[i].get("firstName") && tableRows[j].children("td:nth-child(2)") == result.items[i].get("lastName")){
-							if(result.items[i].get("isCheckedIn")){
-								tableRows[j].css("backgroundColor", "gray");
-							}
-							else{
-								tableRows[j].css("backgroundColor", "white");
-							}
-						}
+	  function updateTable(guestList){
+
+		for(var i; i < guestList.length; i++){
+			var tableRows = $("#personDataTable").children("tr");
+			for(var j = 0; j < tableRows.length; j++){
+				if(tableRows[j].children("td:nth-child(1)") == guestList[i].get("firstName") && tableRows[j].children("td:nth-child(2)") == guestList[i].get("lastName")){
+					if(guestList[i].get("isCheckedIn")){
+						tableRows[j].css("backgroundColor", "gray");
+					}
+					else{
+						tableRows[j].css("backgroundColor", "white");
 					}
 				}
-            },
-            error: function(error) {
-				console.log("Failed to retrieve table data.");
-            }
-        });
+			}
+		}
 	  }
 
 
@@ -88,7 +81,7 @@
           for (var i = 0; i < data.length; i++) {
               drawRow(data[i]);
           }
-		  updateTable();
+		  updateTable(data);
       }
 
       function drawRow(rowData) {
