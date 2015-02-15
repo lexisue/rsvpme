@@ -60,15 +60,18 @@
         });
 		
 	  function updateTable(guestList){
-		$('tr').each(function(i){
+		$('tr').each(function(j){
+      //console.log($(this))
 			for(var i = 0; i < guestList.length; i++){
-				if($(this).find('.guestID') == guestList[i].id){
-					if(guestList[i].get('isCheckedIn'){
+        //console.log($(this).find('.guestID').val() + "  " + guestList[i].id);
+				if($(this).find('.guestID').val() == guestList[i].id){
+          //console.log("MATCH");
+					if(guestList[i].get('isCheckedIn')){
 						$(this).css("background", "gray");
 					}
 					else{
 						$(this).css("background", "white");
-					}
+					}break;
 				}
 			}
 		});
@@ -83,13 +86,13 @@
       }
 
       function drawRow(rowData) {
-  //        if(rowData.get("isCheckedIn") == true){
+    //      if(rowData.get("isCheckedIn") == true){
             var row = $("<tr />")
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append($("<input type=hidden class='guestID' name='checkedGuests[]' value='" + rowData.id + "'>"));
             row.append($("<td>" + rowData.get("firstName") + "</td>"));
             row.append($("<td>" + rowData.get("lastName")+ "</td>"));
- //         }
+      //    }
       }
       jQuery(document).ready(function($){
         $("form").on("submit", function(e){
@@ -116,9 +119,21 @@
       console.log($("#personDataTable"));
       });
 
-
+      
+       
 
     </script>
+    <script>var timer = setInterval(function(){
+        //console.log("Hello");
+        Parse.Cloud.run('getGuestList', {}, {
+            success: function(result) {
+                updateTable(result.items);
+            },
+            error: function(error) {
+            }
+        });
+        updateTable();
+    }, 5000);</script>
   </head>
   <body>
     <form>
