@@ -72,6 +72,7 @@
         confirmCode.hidden = NO;
         loginButton.hidden = NO;
         welcomeLabel.hidden = YES;
+        checkmark.hidden = YES;
         
         checkInButton.hidden = YES;
         logoutButton.hidden = YES;
@@ -137,6 +138,11 @@
                     [ParseRest callFunctionInBackground:@"attendance" withParameters:nil block:^(NSDictionary* result, NSError* error) {
                         attendanceLabel.text = [result objectForKey:@"message"];
                     }];
+                    
+                    // unsubscribe the user from the group to stop receiving notifications
+                    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                    [currentInstallation removeObject:@"guestApp" forKey:@"channels"];
+                    [currentInstallation saveInBackground];
                 }
                 else {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"something failed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
