@@ -64,20 +64,16 @@
 		for(var i = 0; i < guestList.length; i++){
       console.log(guestList[i]);
 			var tableRows = $("#personDataTable").children("tbody:first-child").children();
-			for(var j = 0; j < tableRows.length; j++){
-        console.log("td");
-        console.log($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(1)"));
-        console.log($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(2)"))
-				if($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(1)") == guestList[i].attributes.firstName && $("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(2)") == guestList[i].attributes.lastName){
-          console.log('        ' + match);
+			$("tr").each(function(i){
+				if(i.children("td:nth-child(1)") == guestList[i].attribute.firstName){
 					if(guestList[i].get("isCheckedIn")){
-						tableRows[j].css("background", "#777777");
+						i.css("background", "#777777");
 					}
 					else{
-						tableRows[j].css("background", "white");
+						i.css("background", "white");
 					}
 				}
-			}
+			});
 		}
 	  }
 
