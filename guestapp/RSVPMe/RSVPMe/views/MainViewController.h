@@ -17,6 +17,7 @@
     IBOutlet UIButton* loginButton;
     IBOutlet UILabel* attendanceLabel;
     IBOutlet UILabel* welcomeLabel;
+    IBOutlet UIButton* logoutButton;
     
     IBOutlet UIImageView* checkmark;
     
@@ -25,6 +26,8 @@
 - (void)showOrHideCheckIn;
 
 - (IBAction)doLogin:(id)sender;
+
+- (IBAction)doLogout:(id)sender;
 
 - (IBAction)doCheckIn:(id)sender;
 

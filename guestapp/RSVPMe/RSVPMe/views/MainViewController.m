@@ -49,6 +49,7 @@
         lastNameField.hidden = YES;
         confirmCode.hidden = YES;
         loginButton.hidden = YES;
+        logoutButton.hidden = NO;
         
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
         BOOL isCheckedIn = [defaults boolForKey:CHECKED_IN_STRING];
@@ -75,6 +76,7 @@
         welcomeLabel.hidden = YES;
         
         checkInButton.hidden = YES;
+        logoutButton.hidden = YES;
     }
 }
 
@@ -105,6 +107,16 @@
             [alert show];
         }
     }];
+}
+
+- (IBAction)doLogout:(id)sender {
+    [PFUser logOut];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@(NO) forKey:CHECKED_IN_STRING];
+    [defaults synchronize];
+    
+    [self showOrHideCheckIn];
 }
 
 - (IBAction)doCheckIn:(id)sender {

@@ -58,22 +58,40 @@
             error: function(error) {
             }
         });
+		
+	  function updateTable(guestList){
+
+		for(var i; i < guestList.length; i++){
+			var tableRows = $("#personDataTable").children("tr");
+			for(var j = 0; j < tableRows.length; j++){
+				if(tableRows[j].children("td:nth-child(1)") == guestList[i].get("firstName") && tableRows[j].children("td:nth-child(2)") == guestList[i].get("lastName")){
+					if(guestList[i].get("isCheckedIn")){
+						tableRows[j].css("backgroundColor", "gray");
+					}
+					else{
+						tableRows[j].css("backgroundColor", "white");
+					}
+				}
+			}
+		}
+	  }
 
 
       function drawTable(data) {
           for (var i = 0; i < data.length; i++) {
               drawRow(data[i]);
           }
+		  updateTable(data);
       }
 
       function drawRow(rowData) {
-          if(rowData.get("isCheckedIn") == true){
+  //        if(rowData.get("isCheckedIn") == true){
             var row = $("<tr />")
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             row.append($("<input type=hidden class='guestID' name='checkedGuests[]' value='" + rowData.id + "'>"));
             row.append($("<td>" + rowData.get("firstName") + "</td>"));
             row.append($("<td>" + rowData.get("lastName")+ "</td>"));
-          }
+ //         }
       }
       jQuery(document).ready(function($){
         $("form").on("submit", function(e){
