@@ -85,8 +85,8 @@ Parse.Cloud.define("checkIn", function(request, response) {
 
 									if (result) {
 										var percentagePushHostQuery = new Parse.Query(Parse.Installation);
-										percentagePushQuery.equalTo('deviceType', 'ios');
-										percentagePushQuery.equalTo('channels', 'hostApp');
+										percentagePushHostQuery.equalTo('deviceType', 'ios');
+										percentagePushHostQuery.equalTo('channels', 'hostApp');
 
 										var percentagePushGuestQuery = new Parse.Query(Parse.Installation);
 										percentagePushGuestQuery.equalTo('deviceType', 'ios');
