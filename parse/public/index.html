@@ -60,16 +60,21 @@
         });
 		
 	  function updateTable(guestList){
-
-		for(var i; i < guestList.length; i++){
-			var tableRows = $("#personDataTable").children("tr");
+      console.log('update entered');
+		for(var i = 0; i < guestList.length; i++){
+      console.log(guestList[i]);
+			var tableRows = $("#personDataTable").children("tbody:first-child").children();
 			for(var j = 0; j < tableRows.length; j++){
-				if(tableRows[j].children("td:nth-child(1)") == guestList[i].get("firstName") && tableRows[j].children("td:nth-child(2)") == guestList[i].get("lastName")){
+        console.log("td");
+        console.log($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(1)"));
+        console.log($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(2)"))
+				if($("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(1)") == guestList[i].attributes.firstName && $("#personDataTable").children("tbody:first-child").children("tr:nth-child(" + j + ")").children("td:nth-child(2)") == guestList[i].attributes.lastName){
+          console.log('        ' + match);
 					if(guestList[i].get("isCheckedIn")){
-						tableRows[j].css("backgroundColor", "gray");
+						tableRows[j].css("background", "#777777");
 					}
 					else{
-						tableRows[j].css("backgroundColor", "white");
+						tableRows[j].css("background", "white");
 					}
 				}
 			}
