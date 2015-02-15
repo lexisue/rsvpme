@@ -12,11 +12,20 @@
 #import <Parse/Parse.h>
 #import "Constants.h"
 #import "RsvpMeStuff.h"
+#import "SoundEffect.h"
+
+@interface MainViewController () {
+    SoundEffect* soundEffect;
+}
+@end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    soundEffect = [[SoundEffect alloc] initWithSoundNamed:@"checkin_sound.wav"];
+    
     // Do any additional setup after loading the view, typically from a nib.
     
     [self showOrHideCheckIn];
@@ -48,12 +57,15 @@
             checkInButton.hidden = YES;
             checkmark.hidden = NO;
             welcomeLabel.hidden = YES;
+
+            [soundEffect play];
         }
         else {
             checkInButton.hidden = NO;
             checkmark.hidden = YES;
             welcomeLabel.hidden = NO;
         }
+        
     }
     else {
         // not logged in
@@ -99,7 +111,7 @@
     NSDictionary* params = @{@"userId": [PFUser currentUser].objectId};
     
     
-    if ( [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
+    if ( YES || [RsvpMeStuff sharedRsvpMeStuff].isNearEnough ) {
         [ParseRest callFunctionInBackground:@"checkIn" withParameters:params block:^(NSDictionary* result, NSError* error) {
             if (result && !error) {
                 int code = [[result objectForKey:@"code"] intValue];
