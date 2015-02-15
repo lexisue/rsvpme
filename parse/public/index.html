@@ -60,21 +60,18 @@
         });
 		
 	  function updateTable(guestList){
-      console.log('update entered');
-		for(var i = 0; i < guestList.length; i++){
-      console.log(guestList[i]);
-			var tableRows = $("#personDataTable").children("tbody:first-child").children();
-			$("tr").each(function(i){
-				if(i.children("td:nth-child(1)") == guestList[i].attribute.firstName){
-					if(guestList[i].get("isCheckedIn")){
-						i.css("background", "#777777");
+		$('tr').each(function(i){
+			for(var i = 0; i < guestList.length; i++){
+				if($(this).find('.guestID') == guestList[i].id){
+					if(guestList[i].get('isCheckedIn'){
+						$(this).css("background", "gray");
 					}
 					else{
-						i.css("background", "white");
+						$(this).css("background", "white");
 					}
 				}
-			});
-		}
+			}
+		});
 	  }
 
 
@@ -128,7 +125,6 @@
   <div class="scroll">
     <table id="personDataTable">
     <tr>
-
         <th>First Name</th>
         <th>Last Name</th>
     </tr>
